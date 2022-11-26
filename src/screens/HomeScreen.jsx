@@ -14,7 +14,8 @@ const Home = ({ message }) => {
     setFocusList([...focusList, {
       key: uuid.v1(),
       name: focusInputText
-    }])
+    }]);
+    setFocusInputText('');
   }
   return (
     <View>
