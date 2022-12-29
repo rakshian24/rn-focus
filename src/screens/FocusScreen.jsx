@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Vibration, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import CountDown from '../components/CountDown';
 import { setAppState } from '../actions';
 import { SCREENS } from '../constants';
 import { getFocusItem, getFocusList } from '../reducers';
+import { PATTERN } from '../utils/vibratePattern';
 
 const FocusScreen = () => {
   const activeFocusItem = useSelector(getFocusItem);
@@ -26,6 +27,7 @@ const FocusScreen = () => {
   useEffect(() => {
     //This indicates that the countdown is complete.
     if (progress === 0) {
+      Vibration.vibrate(PATTERN);
       setIsTimeControlDisabled(false);
       handleOnStopCountDown(true);
     }
