@@ -1,6 +1,9 @@
-export const SET_ACTIVE_SCREEN = 'SET_ACTIVE_SCREEN';
+export const SET_APP_STATE = 'SET_APP_STATE';
 
-export const setActiveScreen = (screen) => ({
-    type: SET_ACTIVE_SCREEN,
-    screen
+export const setAppState = (screen, focusItem, isFocusComplete = false, focusList= []) => ({
+    type: SET_APP_STATE,
+    screen,
+    focusItem,
+    isFocusComplete,
+    focusList
 })

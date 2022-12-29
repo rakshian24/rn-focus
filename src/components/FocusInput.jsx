@@ -10,7 +10,7 @@ const FocusInput = ({ focusInputText, setFocusInputText, handleOnInputSubmit }) 
       <TextInput
         label={t("focus_input_label")}
         value={focusInputText}
-        onChangeText={text => setFocusInputText(text.trim())}
+        onChangeText={text => setFocusInputText(text)}
         onSubmitEditing={handleOnInputSubmit}
       />
     </View>

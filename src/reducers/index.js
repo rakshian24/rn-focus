@@ -1,17 +1,24 @@
 import { combineReducers } from "redux";
-import { SET_ACTIVE_SCREEN } from "../actions";
+import { SET_APP_STATE } from "../actions";
 import { SCREENS } from '../constants'
 
 const initialState = {
-  screen: SCREENS.HOME_SCREEN
+  screen: SCREENS.HOME_SCREEN,
+  focusItem: '',
+  isFocusComplete: false,
+  focusList: []
 }
 
-export const screenReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_ACTIVE_SCREEN:
+export const appReducer = (state = initialState, action) => {
+  const { type, screen, focusItem, focusList, isFocusComplete } = action;
+  switch (type) {
+    case SET_APP_STATE:
       return {
         ...state,
-        screen: action.screen
+        screen,
+        focusItem,
+        isFocusComplete,
+        focusList
       }
 
     default:
@@ -20,8 +27,11 @@ export const screenReducer = (state = initialState, action) => {
 }
 
 export default combineReducers({
-  screenReducer
+  appReducer
 })
 
-export const getActiveScreen = (state) => state.screenReducer.screen;
+export const getActiveScreen = (state) => state.appReducer.screen;
+export const getFocusItem = (state) => state.appReducer.focusItem;
+export const getIsFocusComplete = (state) => state.appReducer.isFocusComplete;
+export const getFocusList = (state) => state.appReducer.focusList;
 

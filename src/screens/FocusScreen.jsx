@@ -1,15 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { ProgressBar } from 'react-native-paper';
+import uuid from 'react-native-uuid';
 import { colors } from '../utils/colors';
 import RoundButton from '../components/RoundButton';
-import { ProgressBar } from 'react-native-paper';
 import CountDown from '../components/CountDown';
-import { useDispatch } from 'react-redux';
-import { setActiveScreen } from '../actions';
+import { setAppState } from '../actions';
 import { SCREENS } from '../constants';
+import { getFocusItem, getFocusList } from '../reducers';
 
 const FocusScreen = () => {
+  const activeFocusItem = useSelector(getFocusItem);
+  const focusList = useSelector(getFocusList);
   const { t: message } = useTranslation();
   const dispatch = useDispatch();
   const [isPaused, setIsPaused] = useState(false);
@@ -18,9 +22,10 @@ const FocusScreen = () => {
   const [isTimeControlDisabled, setIsTimeControlDisabled] = useState(false);
 
   useEffect(() => {
+    //This indicates that the countdown is complete.
     if (progress === 0) {
       setIsTimeControlDisabled(false);
-      // handleOnStopCountDown();
+      handleOnStopCountDown(true);
     }
   }, [progress])
 
@@ -33,8 +38,15 @@ const FocusScreen = () => {
     setIsTimeControlDisabled(true);
   }
 
-  const handleOnStopCountDown = () => {
-    dispatch(setActiveScreen(SCREENS.HOME_SCREEN))
+  const handleOnStopCountDown = (isFocusComplete = false) => {
+    let newFocusList = [...focusList]
+    if (isFocusComplete) {
+      newFocusList = [...focusList, {
+        key: uuid.v1(),
+        name: activeFocusItem
+      }]
+    }
+    dispatch(setAppState(SCREENS.HOME_SCREEN, activeFocusItem, isFocusComplete, newFocusList))
   }
 
   return (
@@ -46,7 +58,7 @@ const FocusScreen = () => {
           </View>
           <View style={styles.timerBody}>
             <Text style={styles.timerSubtitle}>{message('focussing_on')}</Text>
-            <Text style={styles.focussedItem}>Code</Text>
+            <Text style={styles.focussedItem}>{activeFocusItem}</Text>
           </View>
         </View>
         <View style={styles.progressBarContainer}>

@@ -1,26 +1,22 @@
 import { StyleSheet, View, Text } from 'react-native'
 import React, { useState } from 'react';
-import uuid from 'react-native-uuid';
 import FocusInput from '../components/FocusInput'
 import FocussedList from '../components/FocussedList'
 import RoundButton from '../components/RoundButton'
 import { colors } from '../utils/colors';
-import { useDispatch } from 'react-redux';
-import { setActiveScreen } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAppState } from '../actions';
 import { SCREENS } from '../constants';
+import { getFocusList } from '../reducers';
 
 const Home = ({ message }) => {
-  const [focusList, setFocusList] = useState([]);
   const [focusInputText, setFocusInputText] = useState('');
   const dispatch = useDispatch();
+  const focusList = useSelector(getFocusList);
 
   const handleOnInputSubmit = () => {
     if (focusInputText) {
-      // setFocusList([...focusList, {
-      //   key: uuid.v1(),
-      //   name: focusInputText
-      // }]);
-      dispatch(setActiveScreen(SCREENS.FOCUS_SCREEN));
+      dispatch(setAppState(SCREENS.FOCUS_SCREEN, focusInputText, false, focusList));
     }
     setFocusInputText('');
   }

@@ -14,8 +14,6 @@ const CountDown = ({ countDownLimit, isPaused, trackProgress }) => {
   useEffect(() => {
     if (countDownLimit > 0) {
       setProgress(seconds / countDownLimit)
-    } else {
-      setProgress(0)
     }
   }, [seconds]);
 
