@@ -62,7 +62,7 @@ const FocusScreen = () => {
         name: activeFocusItem
       }]
     }
-    dispatch(setAppState(SCREENS.HOME_SCREEN, activeFocusItem, isFocusComplete, newFocusList))
+    dispatch(setAppState(SCREENS.HOME_SCREEN, activeFocusItem, newFocusList))
   }
 
   const getStartBtnText = () => {
@@ -97,7 +97,7 @@ const FocusScreen = () => {
       </View>
       <View style={styles.timerController}>
         <View style={styles.timerControllerBtnsContainer}>
-          <RoundButton width={65} buttonText={10} buttonTextSize={20} handleOnSubmit={() => handleOnTimeControlPress(10)} isDisabled={isTimeControlDisabled} style={{backgroundColor: colors.lightBlue1}} />
+          <RoundButton width={65} buttonText={10} buttonTextSize={20} handleOnSubmit={() => handleOnTimeControlPress(10)} isDisabled={isTimeControlDisabled} />
           <RoundButton width={65} buttonText={15} buttonTextSize={20} handleOnSubmit={() => handleOnTimeControlPress(15)} isDisabled={isTimeControlDisabled} />
           <RoundButton width={65} buttonText={20} buttonTextSize={20} handleOnSubmit={() => handleOnTimeControlPress(20)} isDisabled={isTimeControlDisabled} />
         </View>

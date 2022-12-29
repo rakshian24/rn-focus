@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native'
 import React, { useState } from 'react';
+import { Button } from 'react-native-paper';
 import FocusInput from '../components/FocusInput'
 import FocussedList from '../components/FocussedList'
 import RoundButton from '../components/RoundButton'
@@ -16,10 +17,11 @@ const Home = ({ message }) => {
 
   const handleOnInputSubmit = () => {
     if (focusInputText) {
-      dispatch(setAppState(SCREENS.FOCUS_SCREEN, focusInputText, false, focusList));
+      dispatch(setAppState(SCREENS.FOCUS_SCREEN, focusInputText, focusList));
     }
     setFocusInputText('');
   }
+
   return (
     <View>
       <View style={styles.inputContainer}>
@@ -32,7 +34,14 @@ const Home = ({ message }) => {
       </View>
 
       <View style={styles.focusedListContainer}>
-        <View><Text style={styles.focusedListTitle}>{message('focus_list_title')}</Text></View>
+        <View>
+          <Text style={styles.focusedListTitle}>{message('focus_list_title')}</Text>
+        </View>
+        {focusList.length > 0 && <View style={{ display: "flex", alignItems: "flex-end", paddingRight: 16, }}>
+          <Button mode="contained" onPress={() => dispatch(setAppState(SCREENS.HOME_SCREEN, focusInputText, []))}>
+            {message('reset')}
+          </Button>
+        </View>}
         <FocussedList focusList={focusList} />
       </View>
     </View>
@@ -53,7 +62,7 @@ const styles = StyleSheet.create({
     flex: 0.95
   },
   focusedListContainer: {
-    paddingTop: 40,
+    paddingTop: 30,
     paddingLeft: 16,
     paddingRight: 16
   },

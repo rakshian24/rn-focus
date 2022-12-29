@@ -10,6 +10,7 @@
         "focus_list_title": "Things you have focused on: ",
         "focussing_on": "Focusing on:",
         "start": "Start",
-        "pause": "Pause"
+        "pause": "Pause",
+        "reset": "Reset List"
     }
 }
