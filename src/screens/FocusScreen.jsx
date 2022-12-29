@@ -16,10 +16,12 @@ const FocusScreen = () => {
   const focusList = useSelector(getFocusList);
   const { t: message } = useTranslation();
   const dispatch = useDispatch();
-  const [isPaused, setIsPaused] = useState(false);
+  const [isPaused, setIsPaused] = useState(true);
   const [progress, setProgress] = useState(1);
   const [countDownLimit, setCountDownLimit] = useState(0);
   const [isTimeControlDisabled, setIsTimeControlDisabled] = useState(false);
+  const [isStartBtnDisabled, setIsStartBtnDisabled] = useState(true);
+  const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
     //This indicates that the countdown is complete.
@@ -27,7 +29,21 @@ const FocusScreen = () => {
       setIsTimeControlDisabled(false);
       handleOnStopCountDown(true);
     }
-  }, [progress])
+  }, [progress]);
+
+  useEffect(() => {
+    if (!isPaused) {
+      setIsStarted(true)
+    }
+  })
+
+  useEffect(() => {
+    if (countDownLimit === 0) {
+      setIsStartBtnDisabled(true)
+    } else {
+      setIsStartBtnDisabled(false);
+    }
+  }, [countDownLimit])
 
   const trackProgress = (e) => {
     setProgress(e)
@@ -49,12 +65,26 @@ const FocusScreen = () => {
     dispatch(setAppState(SCREENS.HOME_SCREEN, activeFocusItem, isFocusComplete, newFocusList))
   }
 
+  const getStartBtnText = () => {
+    if (progress === 1) {
+      return 'start'
+    } else if (progress < 1 && isPaused) {
+      return 'start'
+    } else {
+      return 'pause'
+    }
+  }
+
+  const handleOnStart = () => {
+    setIsPaused(!isPaused);
+  }
+
   return (
     <View style={styles.focusContainer}>
       <View style={styles.timerWrapper}>
         <View style={styles.timerContainer}>
           <View style={styles.timer}>
-            <CountDown countDownLimit={countDownLimit} isPaused={isPaused} trackProgress={trackProgress} />
+            <CountDown countDownLimit={countDownLimit} isPaused={isPaused} trackProgress={trackProgress} isStarted={isStarted} />
           </View>
           <View style={styles.timerBody}>
             <Text style={styles.timerSubtitle}>{message('focussing_on')}</Text>
@@ -71,7 +101,7 @@ const FocusScreen = () => {
           <RoundButton width={75} buttonText={15} buttonTextSize={25} handleOnSubmit={() => handleOnTimeControlPress(15)} isDisabled={isTimeControlDisabled} />
           <RoundButton width={75} buttonText={20} buttonTextSize={25} handleOnSubmit={() => handleOnTimeControlPress(20)} isDisabled={isTimeControlDisabled} />
         </View>
-        <View style={styles.startCountDownContainer}><RoundButton width={130} buttonText={message(isPaused ? 'start' : 'pause')} buttonTextSize={28} handleOnSubmit={() => setIsPaused(!isPaused)} /></View>
+        <View style={styles.startCountDownContainer}><RoundButton width={130} buttonText={message(getStartBtnText())} buttonTextSize={28} handleOnSubmit={() => handleOnStart()} isDisabled={isStartBtnDisabled} /></View>
         <View style={styles.stopCountDownContainer}><RoundButton width={60} buttonText={'X'} buttonTextSize={25} handleOnSubmit={() => handleOnStopCountDown()} /></View>
       </View>
     </View>

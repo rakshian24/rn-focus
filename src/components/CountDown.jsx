@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native';
 import { colors } from '../utils/colors';
 import { convertSecondsToHHMMSS } from '../utils/timeConvert';
-const CountDown = ({ countDownLimit, isPaused, trackProgress }) => {
+const CountDown = ({ countDownLimit, isPaused, trackProgress, isStarted }) => {
 
   const [seconds, setSeconds] = useState(countDownLimit);
   const [progress, setProgress] = useState(1);
@@ -22,7 +22,7 @@ const CountDown = ({ countDownLimit, isPaused, trackProgress }) => {
   }, [progress])
 
   useEffect(() => {
-    if (countDownLimit > 0) {
+    if (countDownLimit > 0 && isStarted) {
       const interval = setInterval(() => {
         if (!isPaused) {
           if (seconds > 0) {
@@ -32,7 +32,7 @@ const CountDown = ({ countDownLimit, isPaused, trackProgress }) => {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [countDownLimit, seconds, isPaused]);
+  }, [countDownLimit, seconds, isPaused, isStarted]);
 
   return (
     <View>
