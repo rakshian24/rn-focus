@@ -97,12 +97,12 @@ const FocusScreen = () => {
       </View>
       <View style={styles.timerController}>
         <View style={styles.timerControllerBtnsContainer}>
-          <RoundButton width={75} buttonText={10} buttonTextSize={25} handleOnSubmit={() => handleOnTimeControlPress(10)} isDisabled={isTimeControlDisabled} />
-          <RoundButton width={75} buttonText={15} buttonTextSize={25} handleOnSubmit={() => handleOnTimeControlPress(15)} isDisabled={isTimeControlDisabled} />
-          <RoundButton width={75} buttonText={20} buttonTextSize={25} handleOnSubmit={() => handleOnTimeControlPress(20)} isDisabled={isTimeControlDisabled} />
+          <RoundButton width={65} buttonText={10} buttonTextSize={20} handleOnSubmit={() => handleOnTimeControlPress(10)} isDisabled={isTimeControlDisabled} style={{backgroundColor: colors.lightBlue1}} />
+          <RoundButton width={65} buttonText={15} buttonTextSize={20} handleOnSubmit={() => handleOnTimeControlPress(15)} isDisabled={isTimeControlDisabled} />
+          <RoundButton width={65} buttonText={20} buttonTextSize={20} handleOnSubmit={() => handleOnTimeControlPress(20)} isDisabled={isTimeControlDisabled} />
         </View>
-        <View style={styles.startCountDownContainer}><RoundButton width={130} buttonText={message(getStartBtnText())} buttonTextSize={28} handleOnSubmit={() => handleOnStart()} isDisabled={isStartBtnDisabled} /></View>
-        <View style={styles.stopCountDownContainer}><RoundButton width={60} buttonText={'X'} buttonTextSize={25} handleOnSubmit={() => handleOnStopCountDown()} /></View>
+        <View style={styles.startCountDownContainer}><RoundButton width={110} buttonText={message(getStartBtnText())} buttonTextSize={20} handleOnSubmit={() => handleOnStart()} isDisabled={isStartBtnDisabled} /></View>
+        <View style={styles.stopCountDownContainer}><RoundButton width={50} buttonText={'X'} buttonTextSize={20} handleOnSubmit={() => handleOnStopCountDown()} /></View>
       </View>
     </View>
   )
@@ -120,19 +120,19 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: 'center',
     justifyContent: "space-between",
-    paddingTop: 35
+    paddingTop: 35,
   },
   timerContainer: {
     width: "75%",
     display: "flex",
-    height: 200,
+    height: 180,
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-around",
   },
   timer: {
     backgroundColor: colors.tertiary,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 12,
+    paddingBottom: 12,
     paddingLeft: 18,
     paddingRight: 18
   },

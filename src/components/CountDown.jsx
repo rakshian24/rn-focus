@@ -46,7 +46,7 @@ export default CountDown;
 const styles = StyleSheet.create({
   timerTitle: {
     color: colors.white,
-    fontSize: 60,
+    fontSize: 50,
     fontWeight: "600",
     letterSpacing: 1.5
   },
