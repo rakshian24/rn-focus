@@ -1,0 +1,15 @@
+{
+    "translation": {
+        "focus_input_label": "What would you like to focus on?",
+        "choose_language": "Choose language",
+        "english": "English",
+        "kannada": "ಕನ್ನಡ",
+        "hindi": "हिन्दी",
+        "french": "French",
+        "spanish": "Spanish",
+        "focus_list_title": "Things you have focused on: ",
+        "focussing_on": "Focusing on:",
+        "start": "Start",
+        "pause": "Pause"
+    }
+}

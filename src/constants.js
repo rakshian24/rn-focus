@@ -1,0 +1,4 @@
+export const SCREENS = {
+  HOME_SCREEN: 'HOME_SCREEN',
+  FOCUS_SCREEN: 'FOCUS_SCREEN'
+}
