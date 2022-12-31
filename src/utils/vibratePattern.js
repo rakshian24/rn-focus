@@ -1,0 +1,9 @@
+const ONE_SECOND_IN_MS = 1000;
+
+export const PATTERN = [
+  1 * ONE_SECOND_IN_MS,
+  1 * ONE_SECOND_IN_MS,
+  2 * ONE_SECOND_IN_MS,
+  1 * ONE_SECOND_IN_MS,
+  3 * ONE_SECOND_IN_MS,
+];

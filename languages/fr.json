@@ -8,8 +8,9 @@
         "french": "French",
         "spanish": "Spanish",
         "focus_list_title": "Choses sur lesquelles vous vous êtes concentré: ",
-        "focussing_on": "en se concentrant sur:",
+        "focussing_on": "En se concentrant sur:",
         "start": "début",
-        "pause": "Pause"
+        "pause": "Pause",
+        "reset": "Réinitialiser"
     }
 }
